@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: clamav-server
+
+spec:
+  replicas: 1
+
+  template:
+    spec:
+      serviceAccountName: clamav-server
+
+      containers:
+        - name: server
+          image: clamav-server
+          imagePullPolicy: IfNotPresent
+
+          envFrom:
+            - configMapRef:
+                name: clamav-server
+
+          ports:
+            - name: clamd
+              containerPort: 3310
+              protocol: TCP
+            - name: milter
+              containerPort: 7357
+              protocol: TCP
+
+          # resources:
+          #   requests:
+          #     cpu: "0.1"
+          #     memory: "64Mi"
+          #   limits:
+          #     cpu: "0.5"
+          #     memory: "512Mi"
+
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/clamav
+
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: clamav
+
+...

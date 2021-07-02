@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: clamav-server
+
+spec:
+  ports:
+    - name: clamd
+      port: 3310
+    - name: milter
+      port: 7357
+
+...
