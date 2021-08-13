@@ -10,7 +10,7 @@ commonLabels:
 
 images:
   - name: clamav-server
-    newName: docker.io/clamav/clamav
+    newName: clamav/clamav
     newTag: "unstable"
 
 ...
