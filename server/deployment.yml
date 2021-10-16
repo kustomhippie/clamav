@@ -4,13 +4,30 @@ kind: Deployment
 
 metadata:
   name: clamav-server
+  labels:
+    app.kubernetes.io/name: clamav
+    app.kubernetes.io/component: server
 
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
+
+  strategy:
+    type: Recreate
+
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: clamav
+      app.kubernetes.io/component: server
 
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: clamav
+        app.kubernetes.io/component: server
+
     spec:
-      serviceAccountName: clamav-server
+      enableServiceLinks: false
 
       containers:
         - name: server
@@ -29,14 +46,6 @@ spec:
               containerPort: 7357
               protocol: TCP
 
-          # resources:
-          #   requests:
-          #     cpu: "0.1"
-          #     memory: "64Mi"
-          #   limits:
-          #     cpu: "0.5"
-          #     memory: "512Mi"
-
           volumeMounts:
             - name: data
               mountPath: /var/lib/clamav
@@ -44,6 +53,6 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: clamav
+            claimName: clamav-server
 
 ...

@@ -3,7 +3,10 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 
 metadata:
-  name: clamav
+  name: clamav-server
+  labels:
+    app.kubernetes.io/name: clamav
+    app.kubernetes.io/component: server
 
 spec:
   accessModes:

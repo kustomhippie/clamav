@@ -4,8 +4,15 @@ kind: Service
 
 metadata:
   name: clamav-server
+  labels:
+    app.kubernetes.io/name: clamav
+    app.kubernetes.io/component: server
 
 spec:
+  selector:
+    app.kubernetes.io/name: clamav
+    app.kubernetes.io/component: server
+
   ports:
     - name: clamd
       port: 3310
