@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0](https://github.com/kustomhippie/clamav/compare/v1.0.0...v2.0.0) (2023-07-17)
+
+
+### Features
+
+* **major:** update actionhippie/kustomize action to v2 ([11c9a76](https://github.com/kustomhippie/clamav/commit/11c9a7648ce19be9d0586c710370595a60bdbb23))
+
 ## 1.0.0 (2023-06-05)
 
 
